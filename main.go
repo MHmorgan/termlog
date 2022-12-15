@@ -3,6 +3,7 @@ package termlog
 import (
 	"fmt"
 	"os"
+	"sync"
 	"time"
 
 	"github.com/logrusorgru/aurora/v3"
@@ -12,28 +13,13 @@ import (
 var (
 	au               aurora.Aurora
 	logfile          *os.File
-	logger           = myLogger{messages: make(chan string)}
+	mtx              = &sync.Mutex{}
 	timestampEnabled = false
 	colorsEnabled    = true
 )
 
 func init() {
 	SetLogFile(os.Stderr)
-	go logger.run()
-}
-
-type myLogger struct {
-	messages chan string
-}
-
-func (l myLogger) run() {
-	for msg := range l.messages {
-		_, _ = fmt.Fprintln(logfile, msg)
-	}
-}
-
-func (l myLogger) log(msg string) {
-	l.messages <- msg
 }
 
 func useColor() bool {
@@ -104,7 +90,9 @@ func Log(style func(string) string, prefix, msg string, args ...interface{}) {
 		msg = fmt.Sprintf("%s %s", style(prefix), style(msg))
 	}
 
-	logger.log(msg)
+	mtx.Lock()
+	defer mtx.Unlock()
+	_, _ = fmt.Fprintln(logfile, msg)
 }
 
 // Err writes an error message to the log file.
