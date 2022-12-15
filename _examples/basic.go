@@ -9,5 +9,5 @@ func main() {
 	tl.Emph("This is a test")
 	tl.SetTimestampEnabled(true)
 	tl.Warn("This is a warning")
-	tl.Err("Something went wrong!")
+	tl.Errf("Something went %v!", "wrong")
 }
