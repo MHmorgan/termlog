@@ -16,3 +16,22 @@ applications.
 * Thread-safe implementation.
 * Any error returned by calls to `fmt` functions are
   ignored.
+
+
+Example
+-------
+
+```go
+package main
+
+import (
+	tl "github.com/mhmorgan/termlog"
+)
+
+func main() {
+	tl.Info("Hello, world!")
+	
+	tl.SetTimestampEnabled(true)
+	tl.Err("Something went wrong!")
+}
+```
