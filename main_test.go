@@ -1,8 +1,26 @@
 package termlog
 
 import (
+	"os"
 	"testing"
 )
+
+func ExampleAll() {
+	SetLogFile(os.Stdout)
+	Bad("Bad")
+	Emph("Emph")
+	Err("Err")
+	Good("Good")
+	Info("Info")
+	Warn("Warn")
+	// Output:
+	// [✗] Bad
+	// [*] Emph
+	// [!!] Err
+	// [✓] Good
+	// [·] Info
+	// [!] Warn
+}
 
 func TestBad(t *testing.T) {
 	t.Run("TestBad", func(t *testing.T) {
