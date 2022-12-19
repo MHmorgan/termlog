@@ -1,8 +1,7 @@
 Termlog
 =======
 
-Minimalistic, opinionated logging library for terminal
-applications.
+An opinionated logging library for terminal applications.
 
 * Writes to `stderr` by default. May write to any `os.File`.
 * Prints with colors and text formatting. This may be
@@ -14,8 +13,8 @@ applications.
 * A timestamp may be added to the log messages. This is
   disabled by default.
 * Thread-safe implementation.
-* Any error returned by calls to `fmt` functions are
-  ignored.
+* Any errors encountered when writing to the log file
+  is ignored.
 
 
 Example
@@ -32,6 +31,6 @@ func main() {
 	tl.Info("Hello, world!")
 	
 	tl.SetTimestampEnabled(true)
-	tl.Err("Something went wrong!")
+	tl.Error("Something went wrong!")
 }
 ```
