@@ -109,6 +109,18 @@ func Errf(format string, a ...interface{}) {
 	Err(fmt.Sprintf(format, a...))
 }
 
+// Fatal is like Err, but exits the program with exit code 1.
+func Fatal(a ...interface{}) {
+	Err(a...)
+	os.Exit(1)
+}
+
+// Fatalf is like Fatal, but takes a format string and arguments.
+func Fatalf(format string, a ...interface{}) {
+	Errf(format, a...)
+	os.Exit(1)
+}
+
 // Warn writes a warning message to the log file.
 func Warn(a ...interface{}) {
 	style := func(s string) string {
