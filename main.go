@@ -92,12 +92,12 @@ func Log(style func(string) string, prefix string, a ...any) {
 }
 
 // Logf is like Log, but takes a format string and arguments.
-func Logf(style func(string) string, prefix, format string, a ...interface{}) {
+func Logf(style func(string) string, prefix, format string, a ...any) {
 	Log(style, prefix, fmt.Sprintf(format, a...))
 }
 
 // Err writes an error message to the log file.
-func Err(a ...interface{}) {
+func Err(a ...any) {
 	style := func(s string) string {
 		return au.Red(au.Bold(s)).String()
 	}
@@ -105,24 +105,24 @@ func Err(a ...interface{}) {
 }
 
 // Errf is like Err, but takes a format string and arguments.
-func Errf(format string, a ...interface{}) {
+func Errf(format string, a ...any) {
 	Err(fmt.Sprintf(format, a...))
 }
 
 // Fatal is like Err, but exits the program with exit code 1.
-func Fatal(a ...interface{}) {
+func Fatal(a ...any) {
 	Err(a...)
 	os.Exit(1)
 }
 
 // Fatalf is like Fatal, but takes a format string and arguments.
-func Fatalf(format string, a ...interface{}) {
+func Fatalf(format string, a ...any) {
 	Errf(format, a...)
 	os.Exit(1)
 }
 
 // Warn writes a warning message to the log file.
-func Warn(a ...interface{}) {
+func Warn(a ...any) {
 	style := func(s string) string {
 		return au.Yellow(au.Bold(s)).String()
 	}
@@ -130,12 +130,12 @@ func Warn(a ...interface{}) {
 }
 
 // Warnf is like Warn, but takes a format string and arguments.
-func Warnf(format string, a ...interface{}) {
+func Warnf(format string, a ...any) {
 	Warn(fmt.Sprintf(format, a...))
 }
 
 // Emph writes an emphasized message to the log file.
-func Emph(a ...interface{}) {
+func Emph(a ...any) {
 	style := func(s string) string {
 		return au.Bold(s).String()
 	}
@@ -143,12 +143,12 @@ func Emph(a ...interface{}) {
 }
 
 // Emphf is like Emph, but takes a format string and arguments.
-func Emphf(format string, a ...interface{}) {
+func Emphf(format string, a ...any) {
 	Emph(fmt.Sprintf(format, a...))
 }
 
 // Info writes an info message to the log file.
-func Info(a ...interface{}) {
+func Info(a ...any) {
 	style := func(s string) string {
 		return au.Faint(s).String()
 	}
@@ -156,12 +156,12 @@ func Info(a ...interface{}) {
 }
 
 // Infof is like Info, but takes a format string and arguments.
-func Infof(format string, a ...interface{}) {
+func Infof(format string, a ...any) {
 	Info(fmt.Sprintf(format, a...))
 }
 
 // Good writes a success message to the log file.
-func Good(a ...interface{}) {
+func Good(a ...any) {
 	style := func(s string) string {
 		return au.Green(au.Bold(s)).String()
 	}
@@ -169,12 +169,12 @@ func Good(a ...interface{}) {
 }
 
 // Goodf is like Good, but takes a format string and arguments.
-func Goodf(format string, a ...interface{}) {
+func Goodf(format string, a ...any) {
 	Good(fmt.Sprintf(format, a...))
 }
 
 // Bad writes a failure message to the log file.
-func Bad(a ...interface{}) {
+func Bad(a ...any) {
 	style := func(s string) string {
 		return au.Red(au.Bold(s)).String()
 	}
@@ -182,6 +182,6 @@ func Bad(a ...interface{}) {
 }
 
 // Badf is like Bad, but takes a format string and arguments.
-func Badf(format string, a ...interface{}) {
+func Badf(format string, a ...any) {
 	Bad(fmt.Sprintf(format, a...))
 }
