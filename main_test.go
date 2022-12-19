@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func ExampleAll() {
+func Example() {
 	SetLogFile(os.Stdout)
 	Bad("Bad")
 	Emph("Emph")
